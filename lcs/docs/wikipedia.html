@@ -1,0 +1,862 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" dir="ltr" class="client-nojs" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Longest common subsequence problem - Wikipedia, the free encyclopedia</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta name="generator" content="MediaWiki 1.18wmf1" />
+<link rel="alternate" type="application/x-wiki" title="Edit this page" href="/w/index.php?title=Longest_common_subsequence_problem&amp;action=edit" />
+<link rel="edit" title="Edit this page" href="/w/index.php?title=Longest_common_subsequence_problem&amp;action=edit" />
+<link rel="apple-touch-icon" href="//en.wikipedia.org/apple-touch-icon.png" />
+<link rel="shortcut icon" href="/favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="/w/opensearch_desc.php" title="Wikipedia (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="//en.wikipedia.org/w/api.php?action=rsd" />
+<link rel="copyright" href="//creativecommons.org/licenses/by-sa/3.0/" />
+<link rel="alternate" type="application/atom+xml" title="Wikipedia Atom feed" href="/w/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="//bits.wikimedia.org/en.wikipedia.org/load.php?debug=false&amp;lang=en&amp;modules=ext.wikihiero%7Cmediawiki.legacy.commonPrint%2Cshared%7Cskins.vector&amp;only=styles&amp;skin=vector&amp;*" type="text/css" media="all" />
+<meta name="ResourceLoaderDynamicStyles" content="" />
+<link rel="stylesheet" href="//bits.wikimedia.org/en.wikipedia.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=styles&amp;skin=vector&amp;*" type="text/css" media="all" />
+<style type="text/css" media="all">a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: enwiki:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */</style>
+<script src="//bits.wikimedia.org/en.wikipedia.org/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector&amp;*" type="text/javascript"></script>
+<script type="text/javascript">if ( window.mediaWiki ) {
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "Longest_common_subsequence_problem", "wgTitle": "Longest common subsequence problem", "wgCurRevisionId": 466982829, "wgArticleId": 236105, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": ["Problems on strings", "Combinatorics", "Dynamic programming", "Polynomial-time problems", "NP-complete problems"], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": [], "wgSearchNamespaces": [0], "wgFlaggedRevsParams": {"tags": {"status": {"levels": 1, "quality": 2, "pristine": 3}}}, "wgStableRevisionId": null, "wgVectorEnabledModules": {"collapsiblenav": true, "collapsibletabs": true, "editwarning": true, "expandablesearch": false, "footercleanup": false, "sectioneditlinks": false, "simplesearch": true, "experiments": true}, "wgWikiEditorEnabledModules": {"toolbar": true, "dialogs": true, "hidesig": true, "templateEditor": false, "templates": false, "preview": false, "previewDialog": false, "publish": false, "toc": false}, "wgTrackingToken": "c1d051ef24895a002704178ccf5bd70d", "wikilove-recipient": "", "wikilove-edittoken": "+\\", "wikilove-anon": 0, "mbEmailEnabled": true, "mbUserEmail": false, "mbIsEmailConfirmationPending": false, "Geo": {"city": "", "country": ""}, "wgNoticeProject": "wikipedia"});
+}
+</script><script type="text/javascript">if ( window.mediaWiki ) {
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+<!--[if lt IE 7]><style type="text/css">body{behavior:url("/w/skins-1.18/vector/csshover.min.htc")}</style><![endif]--></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Longest_common_subsequence_problem action-view skin-vector">
+		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<!-- content -->
+		<div id="content">
+			<a id="top"></a>
+			<div id="mw-js-message" style="display:none;"></div>
+						<!-- sitenotice -->
+			<div id="siteNotice"><!-- centralNotice loads here --></div>
+			<!-- /sitenotice -->
+						<!-- firstHeading -->
+			<h1 id="firstHeading" class="firstHeading">Longest common subsequence problem</h1>
+			<!-- /firstHeading -->
+			<!-- bodyContent -->
+			<div id="bodyContent">
+								<!-- tagline -->
+				<div id="siteSub">From Wikipedia, the free encyclopedia</div>
+				<!-- /tagline -->
+								<!-- subtitle -->
+				<div id="contentSub"></div>
+				<!-- /subtitle -->
+																<!-- jumpto -->
+				<div id="jump-to-nav">
+					Jump to: <a href="#mw-head">navigation</a>,
+					<a href="#p-search">search</a>
+				</div>
+				<!-- /jumpto -->
+								<!-- bodycontent -->
+				<div lang="en" dir="ltr" class="mw-content-ltr"><div class="dablink">Not to be confused with <a href="/wiki/Longest_common_substring_problem" title="Longest common substring problem">longest common substring problem</a>.</div>
+<p>The <b>longest common subsequence</b> (<b>LCS</b>) <b>problem</b> is to find the longest <a href="/wiki/Subsequence" title="Subsequence">subsequence</a> common to all sequences in a set of sequences (often just two). Note that subsequence is different from a substring, see <a href="/wiki/Subsequence#Substring_vs._subsequence" title="Subsequence">substring vs. subsequence</a>. It is a classic <a href="/wiki/Computer_science" title="Computer science">computer science</a> problem, the basis of <a href="/wiki/File_comparison" title="File comparison">file comparison</a> programs such as <a href="/wiki/Diff" title="Diff">diff</a>, and has applications in <a href="/wiki/Bioinformatics" title="Bioinformatics">bioinformatics</a>.</p>
+<table id="toc" class="toc">
+<tr>
+<td>
+<div id="toctitle">
+<h2>Contents</h2>
+</div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#Complexity"><span class="tocnumber">1</span> <span class="toctext">Complexity</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="#Solution_for_two_sequences"><span class="tocnumber">2</span> <span class="toctext">Solution for two sequences</span></a>
+<ul>
+<li class="toclevel-2 tocsection-3"><a href="#Prefixes"><span class="tocnumber">2.1</span> <span class="toctext">Prefixes</span></a></li>
+<li class="toclevel-2 tocsection-4"><a href="#First_property"><span class="tocnumber">2.2</span> <span class="toctext">First property</span></a></li>
+<li class="toclevel-2 tocsection-5"><a href="#Second_property"><span class="tocnumber">2.3</span> <span class="toctext">Second property</span></a></li>
+<li class="toclevel-2 tocsection-6"><a href="#LCS_function_defined"><span class="tocnumber">2.4</span> <span class="toctext">LCS function defined</span></a></li>
+<li class="toclevel-2 tocsection-7"><a href="#Worked_example"><span class="tocnumber">2.5</span> <span class="toctext">Worked example</span></a></li>
+<li class="toclevel-2 tocsection-8"><a href="#Traceback_approach"><span class="tocnumber">2.6</span> <span class="toctext">Traceback approach</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-9"><a href="#Relation_to_other_problems"><span class="tocnumber">3</span> <span class="toctext">Relation to other problems</span></a></li>
+<li class="toclevel-1 tocsection-10"><a href="#Code_for_the_dynamic_programming_solution"><span class="tocnumber">4</span> <span class="toctext">Code for the dynamic programming solution</span></a>
+<ul>
+<li class="toclevel-2 tocsection-11"><a href="#Computing_the_length_of_the_LCS"><span class="tocnumber">4.1</span> <span class="toctext">Computing the length of the LCS</span></a></li>
+<li class="toclevel-2 tocsection-12"><a href="#Reading_out_an_LCS"><span class="tocnumber">4.2</span> <span class="toctext">Reading out an LCS</span></a></li>
+<li class="toclevel-2 tocsection-13"><a href="#Reading_out_all_LCSs"><span class="tocnumber">4.3</span> <span class="toctext">Reading out all LCSs</span></a></li>
+<li class="toclevel-2 tocsection-14"><a href="#Print_the_diff"><span class="tocnumber">4.4</span> <span class="toctext">Print the diff</span></a></li>
+<li class="toclevel-2 tocsection-15"><a href="#Example"><span class="tocnumber">4.5</span> <span class="toctext">Example</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-16"><a href="#Code_optimization"><span class="tocnumber">5</span> <span class="toctext">Code optimization</span></a>
+<ul>
+<li class="toclevel-2 tocsection-17"><a href="#Reduce_the_problem_set"><span class="tocnumber">5.1</span> <span class="toctext">Reduce the problem set</span></a></li>
+<li class="toclevel-2 tocsection-18"><a href="#Reduce_the_comparison_time"><span class="tocnumber">5.2</span> <span class="toctext">Reduce the comparison time</span></a></li>
+<li class="toclevel-2 tocsection-19"><a href="#Reduce_strings_to_hashes"><span class="tocnumber">5.3</span> <span class="toctext">Reduce strings to hashes</span></a></li>
+<li class="toclevel-2 tocsection-20"><a href="#Reduce_the_required_space"><span class="tocnumber">5.4</span> <span class="toctext">Reduce the required space</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-21"><a href="#See_also"><span class="tocnumber">6</span> <span class="toctext">See also</span></a></li>
+<li class="toclevel-1 tocsection-22"><a href="#References"><span class="tocnumber">7</span> <span class="toctext">References</span></a></li>
+<li class="toclevel-1 tocsection-23"><a href="#External_links"><span class="tocnumber">8</span> <span class="toctext">External links</span></a></li>
+</ul>
+</td>
+</tr>
+</table>
+<h2><span class="editsection">[<a href="/w/index.php?title=Longest_common_subsequence_problem&amp;action=edit&amp;section=1" title="Edit section: Complexity">edit</a>]</span> <span class="mw-headline" id="Complexity">Complexity</span></h2>
+<p>For the general case of an arbitrary number of input sequences, the problem is <a href="/wiki/NP-hard" title="NP-hard">NP-hard</a>.<sup id="cite_ref-0" class="reference"><a href="#cite_note-0"><span>[</span>1<span>]</span></a></sup> When the number of sequences is constant, the problem is solvable in polynomial time by <a href="/wiki/Dynamic_programming" title="Dynamic programming">dynamic programming</a> (see <i>Solution</i> below). Assume you have <span class="texhtml" dir="ltr"><i>N</i></span> sequences of lengths <span class="texhtml" dir="ltr"><i>n</i><sub>1</sub>,...,<i>n</i><sub><i>N</i></sub></span>. A naive search would test each of the <img class="tex" alt="2^{n_1}" src="//upload.wikimedia.org/wikipedia/en/math/9/2/9/9290d1735ecbbf9dc6d966a795564465.png" /> subsequences of the first sequence to determine whether they are also subsequences of the remaining sequences; each subsequence may be tested in time linear in the lengths of the remaining sequences, so the time for this algorithm would be</p>
+<dl>
+<dd><img class="tex" alt="O\left( 2^{n_1} \sum_{i&gt;1} n_i\right)." src="//upload.wikimedia.org/wikipedia/en/math/d/1/d/d1db1b93b8ffe647ddede8e710266864.png" /></dd>
+</dl>
+<p>For the case of two sequences of <i>n</i> and <i>m</i> elements, the running time of the dynamic programming approach is <a href="/wiki/Big_O_notation" title="Big O notation">O</a>(<i>n</i> × <i>m</i>). For an arbitrary number of input sequences, the dynamic programming approach gives a solution in</p>
+<dl>
+<dd><img class="tex" alt="O\left(N \prod_{i=1}^{N} n_i\right)." src="//upload.wikimedia.org/wikipedia/en/math/e/d/f/edf90707374ff182cfa84d46adcad2ca.png" /></dd>
+</dl>
+<p>There exist methods with lower complexity,<sup id="cite_ref-BHR00_1-0" class="reference"><a href="#cite_note-BHR00-1"><span>[</span>2<span>]</span></a></sup> which often depend on the length of the LCS, the size of the alphabet, or both.</p>
+<p>Notice that the LCS is not necessarily unique; for example the LCS of "ABC" and "ACB" is both "AB" and "AC". Indeed the LCS problem is often defined to be finding <i>all</i> common subsequences of a maximum length. This problem inherently has higher complexity, as the number of such subsequences is exponential in the worst case,<sup id="cite_ref-_2-0" class="reference"><a href="#cite_note--2"><span>[</span>3<span>]</span></a></sup> even for only two input strings. It should not be confused with the <a href="/wiki/Longest_common_substring_problem" title="Longest common substring problem">longest common substring problem</a> (<a href="/wiki/Substring" title="Substring">substrings</a> are necessarily contiguous).</p>
+<h2><span class="editsection">[<a href="/w/index.php?title=Longest_common_subsequence_problem&amp;action=edit&amp;section=2" title="Edit section: Solution for two sequences">edit</a>]</span> <span class="mw-headline" id="Solution_for_two_sequences">Solution for two sequences</span></h2>
+<p>The LCS problem has an <a href="/wiki/Optimal_substructure" title="Optimal substructure">optimal substructure</a>: the problem can be broken down into smaller, simple "subproblems", which can be broken down into yet simpler subproblems, and so on, until, finally, the solution becomes trivial. The LCS problem also has <a href="/wiki/Overlapping_subproblems" title="Overlapping subproblems">overlapping subproblems</a>: the solution to a higher subproblem depends on the solutions to several of the lower subproblems. Problems with these two properties—optimal substructure and overlapping subproblems—can be approached by a problem-solving technique called <a href="/wiki/Dynamic_programming" title="Dynamic programming">dynamic programming</a>, in which the solution is built up starting with the simplest subproblems. The procedure requires <a href="/wiki/Memoization" title="Memoization">memoization</a>—saving the solutions to one level of subproblem in a table so that the solutions are available to the next level of subproblems. This method is illustrated here.</p>
+<h3><span class="editsection">[<a href="/w/index.php?title=Longest_common_subsequence_problem&amp;action=edit&amp;section=3" title="Edit section: Prefixes">edit</a>]</span> <span class="mw-headline" id="Prefixes">Prefixes</span></h3>
+<p>The subproblems become simpler as the sequences become shorter. Shorter sequences are conveniently described using the term <i>prefix</i>. A prefix of a sequence is the sequence with the end cut off. Let <i>S</i> be the sequence (AGCA). Then, a prefix of <i>S</i> is the sequence (AG). Prefixes are denoted with the name of the sequence, followed by a subscript to indicate how many characters the prefix contains.<sup id="cite_ref-3" class="reference"><a href="#cite_note-3"><span>[</span>4<span>]</span></a></sup> The prefix (AG) is denoted <i>S</i><sub>2</sub>, since it contains the first 2 elements of <i>S</i>. The possible prefixes of <i>S</i> are</p>
+<dl>
+<dd><i>S</i><sub>1</sub> = (A)</dd>
+<dd><i>S</i><sub>2</sub> = (AG)</dd>
+<dd><i>S</i><sub>3</sub> = (AGC)</dd>
+<dd><i>S</i><sub>4</sub> = (AGCA).</dd>
+</dl>
+<p>The solution to the LCS problem for two arbitrary sequences, <i>X</i> and <i>Y</i>, amounts to constructing some function, <i>LCS</i>(<i>X</i>, <i>Y</i>), that gives the longest subsequences common to <i>X</i> and <i>Y</i>. That function relies on the following two properties.</p>
+<h3><span class="editsection">[<a href="/w/index.php?title=Longest_common_subsequence_problem&amp;action=edit&amp;section=4" title="Edit section: First property">edit</a>]</span> <span class="mw-headline" id="First_property">First property</span></h3>
+<p>Suppose that two sequences both end in the same element. To find their LCS, shorten each sequence by removing the last element, find the LCS of the shortened sequences, and to that LCS append the removed element.</p>
+<dl>
+<dd>For example, here are two sequences having the same last element: (BANANA) and (ATANA).</dd>
+<dd>Remove the same last element. Repeat the procedure until you find no common last element. The removed sequence will be (ANA).</dd>
+<dd>The sequences now under consideration: (BAN) and (AT)</dd>
+<dd>The LCS of these last two sequences is, by inspection, (A).</dd>
+<dd>Append the removed element, (ANA), giving (AANA), which, by inspection, is the LCS of the original sequences.</dd>
+</dl>
+<p>In terms of prefixes,</p>
+<dl>
+<dd><i>LCS</i>(<i>X<sub>n</sub></i>, <i>Y<sub>m</sub></i>) = (<i>LCS</i>( <i>X<sub>n</sub></i><sub>-1</sub>, <i>Y<sub>m</sub></i><sub>-1</sub>), <i>x<sub>n</sub></i>)</dd>
+</dl>
+<p>where the comma indicates that the following element, <i>x<sub>n</sub></i>, is appended to the sequence. Note that the LCS for <i>X<sub>n</sub></i> and <i>Y<sub>m</sub></i> involves determining the LCS of the shorter sequences, <i>X<sub>n</sub></i><sub>-1</sub> and <i>Y<sub>m</sub></i><sub>-1</sub>.</p>
+<h3><span class="editsection">[<a href="/w/index.php?title=Longest_common_subsequence_problem&amp;action=edit&amp;section=5" title="Edit section: Second property">edit</a>]</span> <span class="mw-headline" id="Second_property">Second property</span></h3>
+<p>Suppose that the two sequences X and Y do not end in the same symbol. Then the LCS of X and Y is the longer of the two sequences LCS(X<sub>n</sub>,Y<sub>m-1</sub>) and LCS(X<sub>n-1</sub>,Y<sub>m</sub>).</p>
+<p>To understand this property, consider the two following sequences&#160;:</p>
+<p>sequence X: ABCDEFG (n elements)<br />
+sequence Y: BCDGK (m elements)</p>
+<p>The last character of the LCS of these two sequences either ends with a G (the last element of sequence X) or does not.</p>
+<p><b>Case 1: the LCS ends with a G</b><br />
+Then it cannot end with a K. Thus it does not hurt to remove the K from sequence Y: if K were in the LCS, it would be its last character; as a consequence K is not in the LCS. We can then write: LCS(X<sub>n</sub>,Y<sub>m</sub>) = LCS(X<sub>n</sub>, Y<sub>m-1</sub>).</p>
+<p><b>Case 2: the LCS does not end with a G</b><br />
+Then it does not hurt to remove the G from the sequence X (for the same reason as above). And then we can write: LCS(X<sub>n</sub>,Y<sub>m</sub>) = LCS(X<sub>n-1</sub>, Y<sub>m</sub>).</p>
+<p>In any case, the LCS we are looking for is one of LCS(X<sub>n</sub>, Y<sub>m-1</sub>) or LCS(X<sub>n-1</sub>, Y<sub>m</sub>). Those two last LCS are both common subsequences to X and Y. LCS(X,Y) is the longest. Thus its value is the longest sequence of LCS(X<sub>n</sub>, Y<sub>m-1</sub>) and LCS(X<sub>n-1</sub>, Y<sub>m</sub>).</p>
+<h3><span class="editsection">[<a href="/w/index.php?title=Longest_common_subsequence_problem&amp;action=edit&amp;section=6" title="Edit section: LCS function defined">edit</a>]</span> <span class="mw-headline" id="LCS_function_defined"><i>LCS</i> function defined</span></h3>
+<p>Let two sequences be defined as follows: <i>X</i> = (<i>x</i><sub>1</sub>, <i>x</i><sub>2</sub>...<i>x</i><sub>m</sub>) and <i>Y</i> = (<i>y</i><sub>1</sub>, <i>y</i><sub>2</sub>...<i>y</i><sub>n</sub>). The prefixes of <i>X</i> are <i>X</i><sub>1, 2,...m</sub>; the prefixes of <i>Y</i> are <i>Y</i><sub>1, 2,...n</sub>. Let <i>LCS</i>(<i>X</i><sub><i>i</i></sub>, <i>Y</i><sub><i>j</i></sub>) represent the set of longest common subsequence of prefixes <i>X<sub>i</sub></i> and <i>Y<sub>j</sub></i>. This set of sequences is given by the following.</p>
+<dl>
+<dd><img class="tex" alt="
+LCS\left(X_{i},Y_{j}\right) =
+\begin{cases}
+  \empty
+&amp; \mbox{ if }\ i = 0 \mbox{ or }  j = 0 \\
+  \textrm{ ( } LCS\left(X_{i-1},Y_{j-1}\right), x_i)
+&amp; \mbox{ if } x_i = y_j \\
+  \mbox{longest}\left(LCS\left(X_{i},Y_{j-1}\right),LCS\left(X_{i-1},Y_{j}\right)\right)
+&amp; \mbox{ if } x_i \ne y_j \\
+\end{cases}
+" src="//upload.wikimedia.org/wikipedia/en/math/e/4/9/e49ef6db695cb7edc3da7d67325fd97a.png" /></dd>
+</dl>
+<p>To find the longest subsequences common to <i>X<sub>i</sub></i> and <i>Y<sub>j</sub></i>, compare the elements <i>x<sub>i</sub></i> and <i>y<sub>j</sub></i>. If they are equal, then the sequence <i>LCS</i>(<i>X</i><sub><i>i</i>-1</sub>, <i>Y</i><sub><i>j</i>-1</sub>) is extended by that element, <i>x<sub>i</sub></i>. If they are not equal, then the longer of the two sequences, <i>LCS</i>(<i>X</i><sub><i>i</i></sub>, <i>Y</i><sub><i>j</i>-1</sub>), and <i>LCS</i>(<i>X</i><sub><i>i</i>-1</sub>, <i>Y</i><sub><i>j</i></sub>), is retained. (If they are both the same length, but not identical, then both are retained.) Notice that the subscripts are reduced by 1 in these formulas. That can result in a subscript of 0. Since the sequence elements are defined to start at 1, it was necessary to add the requirement that the LCS is empty when a subscript is zero.</p>
+<h3><span class="editsection">[<a href="/w/index.php?title=Longest_common_subsequence_problem&amp;action=edit&amp;section=7" title="Edit section: Worked example">edit</a>]</span> <span class="mw-headline" id="Worked_example">Worked example</span></h3>
+<p>The longest subsequence common to <i>C</i> = (AGCAT), and <i>R</i> = (GAC) will be found. Because the <i>LCS</i> function uses a "zeroth" element, it is convenient to define zero prefixes that are empty for these sequences: <i>C</i><sub>0</sub> = Ø; and <i>R</i><sub>0</sub> = Ø. All the prefixes are placed in a table with <i>C</i> in the first row (making it a <u>c</u>olumn header) and <i>R</i> in the first column (making it a <u>r</u>ow header).</p>
+<table class="wikitable" style="text-align:center">
+<caption>LCS Strings</caption>
+<tr>
+<th></th>
+<th>0</th>
+<th>A</th>
+<th>G</th>
+<th>C</th>
+<th>A</th>
+<th>T</th>
+</tr>
+<tr>
+<th>0</th>
+<td>Ø</td>
+<td>Ø</td>
+<td>Ø</td>
+<td>Ø</td>
+<td>Ø</td>
+<td>Ø</td>
+</tr>
+<tr>
+<th>G</th>
+<td>Ø</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<th>A</th>
+<td>Ø</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<th>C</th>
+<td>Ø</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</table>
+<p>This table is used to store the LCS sequence for each step of the calculation. The second column and second row have been filled in with Ø, because when an empty sequence is compared with a non-empty sequence, the longest common subsequence is always an empty sequence.</p>
+<p><i>LCS</i>(<i>R</i><sub>1</sub>, <i>C</i><sub>1</sub>) is determined by comparing the first elements in each sequence. G and A are not the same, so this LCS gets (using the "second property") the longest of the two sequences, <i>LCS</i>(<i>R</i><sub>1</sub>, <i>C</i><sub>0</sub>) and <i>LCS</i>(<i>R</i><sub>0</sub>, <i>C</i><sub>1</sub>). According to the table, both of these are empty, so <i>LCS</i>(<i>R</i><sub>1</sub>, <i>C</i><sub>1</sub>) is also empty, as shown in the table below. The arrows indicate that the sequence comes from both the cell above, <i>LCS</i>(<i>R</i><sub>0</sub>, <i>C</i><sub>1</sub>) and the cell on the left, <i>LCS</i>(<i>R</i><sub>1</sub>, <i>C</i><sub>0</sub>).</p>
+<p><i>LCS</i>(<i>R</i><sub>1</sub>, <i>C</i><sub>2</sub>) is determined by comparing G and G. They match, so G is appended to the upper left sequence, <i>LCS</i>(<i>R</i><sub>0</sub>, <i>C</i><sub>1</sub>), which is (Ø), giving (ØG), which is (G).</p>
+<p>For <i>LCS</i>(<i>R</i><sub>1</sub>, <i>C</i><sub>3</sub>), G and C do not match. The sequence above is empty; the one to the left contains one element, G. Selecting the longest of these, <i>LCS</i>(<i>R</i><sub>1</sub>, <i>C</i><sub>3</sub>) is (G). The arrow points to the left, since that is the longest of the two sequences.</p>
+<p><i>LCS</i>(<i>R</i><sub>1</sub>, <i>C</i><sub>4</sub>), likewise, is (G).</p>
+<table class="wikitable" style="text-align:center">
+<caption>"G" Row Completed</caption>
+<tr>
+<th></th>
+<th>Ø</th>
+<th>A</th>
+<th>G</th>
+<th>C</th>
+<th>A</th>
+<th>T</th>
+</tr>
+<tr>
+<th>Ø</th>
+<td>Ø</td>
+<td>Ø</td>
+<td>Ø</td>
+<td>Ø</td>
+<td>Ø</td>
+<td>Ø</td>
+</tr>
+<tr>
+<th>G</th>
+<td>Ø</td>
+<td><img class="tex" alt="\overset{\ \ \uparrow}{\leftarrow}" src="//upload.wikimedia.org/wikipedia/en/math/b/9/2/b92fc54c4b57c5bf4e1b69712a43b10f.png" />Ø</td>
+<td><img class="tex" alt="\overset{\nwarrow}{\ }" src="//upload.wikimedia.org/wikipedia/en/math/2/7/d/27d04233bccd7d3c47a23fc82a53e765.png" />(G)</td>
+<td><img class="tex" alt="\overset{\ }{\leftarrow}" src="//upload.wikimedia.org/wikipedia/en/math/5/1/c/51cb7c049fd9b8b9866c21821af9ec01.png" />(G)</td>
+<td><img class="tex" alt="\overset{\ }{\leftarrow}" src="//upload.wikimedia.org/wikipedia/en/math/5/1/c/51cb7c049fd9b8b9866c21821af9ec01.png" />(G)</td>
+<td><img class="tex" alt="\overset{\ }{\leftarrow}" src="//upload.wikimedia.org/wikipedia/en/math/5/1/c/51cb7c049fd9b8b9866c21821af9ec01.png" />(G)</td>
+</tr>
+<tr>
+<th>A</th>
+<td>Ø</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<th>C</th>
+<td>Ø</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</table>
+<p>For <i>LCS</i>(<i>R</i><sub>2</sub>, <i>C</i><sub>1</sub>), A is compared with A. The two elements match, so A is appended to Ø, giving (A).</p>
+<p>For <i>LCS</i>(<i>R</i><sub>2</sub>, <i>C</i><sub>2</sub>), A and G do not match, so the longest of <i>LCS</i>(<i>R</i><sub>1</sub>, <i>C</i><sub>2</sub>), which is (G), and <i>LCS</i>(<i>R</i><sub>2</sub>, <i>C</i><sub>1</sub>), which is (A), is used. In this case, they each contain one element, so this LCS is given two subsequences: (A) and (G).</p>
+<p>For <i>LCS</i>(<i>R</i><sub>2</sub>, <i>C</i><sub>3</sub>), A does not match C. <i>LCS</i>(<i>R</i><sub>2</sub>, <i>C</i><sub>2</sub>) contains sequences (A) and (G); LCS(<i>R</i><sub>1</sub>, <i>C</i><sub>3</sub>) is (G), which is already contained in <i>LCS</i>(<i>R</i><sub>2</sub>, <i>C</i><sub>2</sub>). The result is that <i>LCS</i>(<i>R</i><sub>2</sub>, <i>C</i><sub>3</sub>) also contains the two subsequences, (A) and (G).</p>
+<p>For <i>LCS</i>(<i>R</i><sub>2</sub>, <i>C</i><sub>4</sub>), A matches A, which is appended to the upper left cell, giving (GA).</p>
+<p>For <i>LCS</i>(<i>R</i><sub>2</sub>, <i>C</i><sub>5</sub>), A does not match T. Comparing the two sequences, (GA) and (G), the longest is (GA), so <i>LCS</i>(<i>R</i><sub>2</sub>, <i>C</i><sub>5</sub>) is (GA).</p>
+<table class="wikitable" style="text-align:center">
+<caption>"G" &amp; "A" Rows Completed</caption>
+<tr>
+<th></th>
+<th>Ø</th>
+<th>A</th>
+<th>G</th>
+<th>C</th>
+<th>A</th>
+<th>T</th>
+</tr>
+<tr>
+<th>Ø</th>
+<td>Ø</td>
+<td>Ø</td>
+<td>Ø</td>
+<td>Ø</td>
+<td>Ø</td>
+<td>Ø</td>
+</tr>
+<tr>
+<th>G</th>
+<td>Ø</td>
+<td><img class="tex" alt="\overset{\ \ \uparrow}{\leftarrow}" src="//upload.wikimedia.org/wikipedia/en/math/b/9/2/b92fc54c4b57c5bf4e1b69712a43b10f.png" />Ø</td>
+<td><img class="tex" alt="\overset{\nwarrow}{\ }" src="//upload.wikimedia.org/wikipedia/en/math/2/7/d/27d04233bccd7d3c47a23fc82a53e765.png" />(G)</td>
+<td><img class="tex" alt="\overset{\ }{\leftarrow}" src="//upload.wikimedia.org/wikipedia/en/math/5/1/c/51cb7c049fd9b8b9866c21821af9ec01.png" />(G)</td>
+<td><img class="tex" alt="\overset{\ }{\leftarrow}" src="//upload.wikimedia.org/wikipedia/en/math/5/1/c/51cb7c049fd9b8b9866c21821af9ec01.png" />(G)</td>
+<td><img class="tex" alt="\overset{\ }{\leftarrow}" src="//upload.wikimedia.org/wikipedia/en/math/5/1/c/51cb7c049fd9b8b9866c21821af9ec01.png" />(G)</td>
+</tr>
+<tr>
+<th>A</th>
+<td>Ø</td>
+<td><img class="tex" alt="\overset{\nwarrow}{\ }" src="//upload.wikimedia.org/wikipedia/en/math/2/7/d/27d04233bccd7d3c47a23fc82a53e765.png" />(A)</td>
+<td><img class="tex" alt="\overset{\ \ \uparrow}{\leftarrow}" src="//upload.wikimedia.org/wikipedia/en/math/b/9/2/b92fc54c4b57c5bf4e1b69712a43b10f.png" />(A) &amp; (G)</td>
+<td><img class="tex" alt="\overset{\ \ \uparrow}{\leftarrow}" src="//upload.wikimedia.org/wikipedia/en/math/b/9/2/b92fc54c4b57c5bf4e1b69712a43b10f.png" />(A) &amp; (G)</td>
+<td><img class="tex" alt="\overset{\nwarrow}{\ }" src="//upload.wikimedia.org/wikipedia/en/math/2/7/d/27d04233bccd7d3c47a23fc82a53e765.png" />(GA)</td>
+<td><img class="tex" alt="\overset{\ }{\leftarrow}" src="//upload.wikimedia.org/wikipedia/en/math/5/1/c/51cb7c049fd9b8b9866c21821af9ec01.png" />(GA)</td>
+</tr>
+<tr>
+<th>C</th>
+<td>Ø</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</table>
+<p>For <i>LCS</i>(<i>R</i><sub>3</sub>, <i>C</i><sub>1</sub>), C and A do not match, so <i>LCS</i>(<i>R</i><sub>3</sub>, <i>C</i><sub>1</sub>) gets the longest of the two sequences, (A).</p>
+<p>For <i>LCS</i>(<i>R</i><sub>3</sub>, <i>C</i><sub>2</sub>), C and G do not match. Both <i>LCS</i>(<i>R</i><sub>3</sub>, <i>C</i><sub>1</sub>) and <i>LCS</i>(<i>R</i><sub>2</sub>, <i>C</i><sub>2</sub>) have one element. The result is that <i>LCS</i>(<i>R</i><sub>3</sub>, <i>C</i><sub>2</sub>) contains the two subsequences, (A) and (G).</p>
+<p>For <i>LCS</i>(<i>R</i><sub>3</sub>, <i>C</i><sub>3</sub>), C and C match, so C is appended to <i>LCS</i>(<i>R</i><sub>2</sub>, <i>C</i><sub>2</sub>), which contains the two subsequences, (A) and (G), giving (AC) and (GC).</p>
+<p>For <i>LCS</i>(<i>R</i><sub>3</sub>, <i>C</i><sub>4</sub>), C and A do not match. Combining <i>LCS</i>(<i>R</i><sub>3</sub>, <i>C</i><sub>3</sub>), which contains (AC) and (GC), and <i>LCS</i>(<i>R</i><sub>2</sub>, <i>C</i><sub>4</sub>), which contains (GA), gives a total of three sequences: (AC), (GC), and (GA).</p>
+<p>Finally, for <i>LCS</i>(<i>R</i><sub>3</sub>, <i>C</i><sub>5</sub>), C and T do not match. The result is that <i>LCS</i>(<i>R</i><sub>3</sub>, <i>C</i><sub>5</sub>) also contains the three sequences, (AC), (GC), and (GA).</p>
+<table class="wikitable" style="text-align:center">
+<caption>Completed LCS Table</caption>
+<tr>
+<th></th>
+<th>Ø</th>
+<th>A</th>
+<th>G</th>
+<th>C</th>
+<th>A</th>
+<th>T</th>
+</tr>
+<tr>
+<th>Ø</th>
+<td>Ø</td>
+<td>Ø</td>
+<td>Ø</td>
+<td>Ø</td>
+<td>Ø</td>
+<td>Ø</td>
+</tr>
+<tr>
+<th>G</th>
+<td>Ø</td>
+<td><img class="tex" alt="\overset{\ \ \uparrow}{\leftarrow}" src="//upload.wikimedia.org/wikipedia/en/math/b/9/2/b92fc54c4b57c5bf4e1b69712a43b10f.png" />Ø</td>
+<td><img class="tex" alt="\overset{\nwarrow}{\ }" src="//upload.wikimedia.org/wikipedia/en/math/2/7/d/27d04233bccd7d3c47a23fc82a53e765.png" />(G)</td>
+<td><img class="tex" alt="\overset{\ }{\leftarrow}" src="//upload.wikimedia.org/wikipedia/en/math/5/1/c/51cb7c049fd9b8b9866c21821af9ec01.png" />(G)</td>
+<td><img class="tex" alt="\overset{\ }{\leftarrow}" src="//upload.wikimedia.org/wikipedia/en/math/5/1/c/51cb7c049fd9b8b9866c21821af9ec01.png" />(G)</td>
+<td><img class="tex" alt="\overset{\ }{\leftarrow}" src="//upload.wikimedia.org/wikipedia/en/math/5/1/c/51cb7c049fd9b8b9866c21821af9ec01.png" />(G)</td>
+</tr>
+<tr>
+<th>A</th>
+<td>Ø</td>
+<td><img class="tex" alt="\overset{\nwarrow}{\ }" src="//upload.wikimedia.org/wikipedia/en/math/2/7/d/27d04233bccd7d3c47a23fc82a53e765.png" />(A)</td>
+<td><img class="tex" alt="\overset{\ \ \uparrow}{\leftarrow}" src="//upload.wikimedia.org/wikipedia/en/math/b/9/2/b92fc54c4b57c5bf4e1b69712a43b10f.png" />(A) &amp; (G)</td>
+<td><img class="tex" alt="\overset{\ \ \uparrow}{\leftarrow}" src="//upload.wikimedia.org/wikipedia/en/math/b/9/2/b92fc54c4b57c5bf4e1b69712a43b10f.png" />(A) &amp; (G)</td>
+<td><img class="tex" alt="\overset{\nwarrow}{\ }" src="//upload.wikimedia.org/wikipedia/en/math/2/7/d/27d04233bccd7d3c47a23fc82a53e765.png" />(GA)</td>
+<td><img class="tex" alt="\overset{\ }{\leftarrow}" src="//upload.wikimedia.org/wikipedia/en/math/5/1/c/51cb7c049fd9b8b9866c21821af9ec01.png" />(GA)</td>
+</tr>
+<tr>
+<th>C</th>
+<td>Ø</td>
+<td><img class="tex" alt="\overset{\ \uparrow}{\ }" src="//upload.wikimedia.org/wikipedia/en/math/1/b/2/1b2447629b8ac4751f2beea69233fc4f.png" />(A)</td>
+<td><img class="tex" alt="\overset{\ \ \uparrow}{\leftarrow}" src="//upload.wikimedia.org/wikipedia/en/math/b/9/2/b92fc54c4b57c5bf4e1b69712a43b10f.png" />(A) &amp; (G)</td>
+<td><img class="tex" alt="\overset{\nwarrow}{\ }" src="//upload.wikimedia.org/wikipedia/en/math/2/7/d/27d04233bccd7d3c47a23fc82a53e765.png" />(AC) &amp; (GC)</td>
+<td><img class="tex" alt="\overset{\ \ \uparrow}{\leftarrow}" src="//upload.wikimedia.org/wikipedia/en/math/b/9/2/b92fc54c4b57c5bf4e1b69712a43b10f.png" />(AC) &amp; (GC) &amp; (GA)</td>
+<td><img class="tex" alt="\overset{\ \ \uparrow}{\leftarrow}" src="//upload.wikimedia.org/wikipedia/en/math/b/9/2/b92fc54c4b57c5bf4e1b69712a43b10f.png" />(AC) &amp; (GC) &amp; (GA)</td>
+</tr>
+</table>
+<p>The final result is that the last cell contains all the longest subsequences common to (AGCAT) and (GAC); these are (AC), (GC), and (GA). The table also shows the longest common subsequences for every possible pair of prefixes. For example, for (AGC) and (GA), the longest common subsequence are (A) and (G).</p>
+<h3><span class="editsection">[<a href="/w/index.php?title=Longest_common_subsequence_problem&amp;action=edit&amp;section=8" title="Edit section: Traceback approach">edit</a>]</span> <span class="mw-headline" id="Traceback_approach">Traceback approach</span></h3>
+<p>Calculating the LCS of a row of the LCS table requires only the solutions to the current row and the previous row. Still, for long sequences, these sequences can get numerous and long, requiring a lot of storage space. Storage space can be saved by saving not the actual subsequences, but the length of the subsequence and the direction of the arrows, as in the table below.</p>
+<table class="wikitable" style="text-align:center">
+<caption>Storing length, rather than sequences</caption>
+<tr>
+<th></th>
+<th>Ø</th>
+<th>A</th>
+<th>G</th>
+<th>C</th>
+<th>A</th>
+<th>T</th>
+</tr>
+<tr>
+<th>Ø</th>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<th>G</th>
+<td>0</td>
+<td><img class="tex" alt="\overset{\ \ \uparrow}{\leftarrow}" src="//upload.wikimedia.org/wikipedia/en/math/b/9/2/b92fc54c4b57c5bf4e1b69712a43b10f.png" />0</td>
+<td><img class="tex" alt="\overset{\nwarrow}{\ }" src="//upload.wikimedia.org/wikipedia/en/math/2/7/d/27d04233bccd7d3c47a23fc82a53e765.png" />1</td>
+<td><img class="tex" alt="\overset{\ }{\leftarrow}" src="//upload.wikimedia.org/wikipedia/en/math/5/1/c/51cb7c049fd9b8b9866c21821af9ec01.png" />1</td>
+<td><img class="tex" alt="\overset{\ }{\leftarrow}" src="//upload.wikimedia.org/wikipedia/en/math/5/1/c/51cb7c049fd9b8b9866c21821af9ec01.png" />1</td>
+<td><img class="tex" alt="\overset{\ }{\leftarrow}" src="//upload.wikimedia.org/wikipedia/en/math/5/1/c/51cb7c049fd9b8b9866c21821af9ec01.png" />1</td>
+</tr>
+<tr>
+<th>A</th>
+<td>0</td>
+<td><img class="tex" alt="\overset{\nwarrow}{\ }" src="//upload.wikimedia.org/wikipedia/en/math/2/7/d/27d04233bccd7d3c47a23fc82a53e765.png" />1</td>
+<td><img class="tex" alt="\overset{\ \ \uparrow}{\leftarrow}" src="//upload.wikimedia.org/wikipedia/en/math/b/9/2/b92fc54c4b57c5bf4e1b69712a43b10f.png" />1</td>
+<td><img class="tex" alt="\overset{\ \ \uparrow}{\leftarrow}" src="//upload.wikimedia.org/wikipedia/en/math/b/9/2/b92fc54c4b57c5bf4e1b69712a43b10f.png" />1</td>
+<td><img class="tex" alt="\overset{\nwarrow}{\ }" src="//upload.wikimedia.org/wikipedia/en/math/2/7/d/27d04233bccd7d3c47a23fc82a53e765.png" />2</td>
+<td><img class="tex" alt="\overset{\ }{\leftarrow}" src="//upload.wikimedia.org/wikipedia/en/math/5/1/c/51cb7c049fd9b8b9866c21821af9ec01.png" />2</td>
+</tr>
+<tr>
+<th>C</th>
+<td>0</td>
+<td><img class="tex" alt="\overset{\ \uparrow}{\ }" src="//upload.wikimedia.org/wikipedia/en/math/1/b/2/1b2447629b8ac4751f2beea69233fc4f.png" />1</td>
+<td><img class="tex" alt="\overset{\ \ \uparrow}{\leftarrow}" src="//upload.wikimedia.org/wikipedia/en/math/b/9/2/b92fc54c4b57c5bf4e1b69712a43b10f.png" />1</td>
+<td><img class="tex" alt="\overset{\nwarrow}{\ }" src="//upload.wikimedia.org/wikipedia/en/math/2/7/d/27d04233bccd7d3c47a23fc82a53e765.png" />2</td>
+<td><img class="tex" alt="\overset{\ \ \uparrow}{\leftarrow}" src="//upload.wikimedia.org/wikipedia/en/math/b/9/2/b92fc54c4b57c5bf4e1b69712a43b10f.png" />2</td>
+<td><img class="tex" alt="\overset{\ \ \uparrow}{\leftarrow}" src="//upload.wikimedia.org/wikipedia/en/math/b/9/2/b92fc54c4b57c5bf4e1b69712a43b10f.png" />2</td>
+</tr>
+</table>
+<p>The actual subsequences are deduced in a "traceback" procedure that follows the arrows backwards, starting from the last cell in the table. When the length decreases, the sequences must have had a common element. Several paths are possible when two arrows are shown in a cell. Below is the table for such an analysis, with numbers colored in cells where the length is about to decrease. The bold numbers trace out the sequence, (GA).<sup id="cite_ref-4" class="reference"><a href="#cite_note-4"><span>[</span>5<span>]</span></a></sup></p>
+<table class="wikitable" style="text-align:center">
+<caption>Traceback example</caption>
+<tr>
+<th></th>
+<th>Ø</th>
+<th>A</th>
+<th>G</th>
+<th>C</th>
+<th>A</th>
+<th>T</th>
+</tr>
+<tr>
+<th>Ø</th>
+<td>0</td>
+<td style="background:silver"><b>0</b></td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<th>G</th>
+<td style="background:silver">0</td>
+<td><img class="tex" alt="\overset{\ \ \uparrow}{\leftarrow}" src="//upload.wikimedia.org/wikipedia/en/math/b/9/2/b92fc54c4b57c5bf4e1b69712a43b10f.png" />0</td>
+<td style="background:silver;color:#FF6600"><img class="tex" alt="\overset{\nwarrow}{\ }" src="//upload.wikimedia.org/wikipedia/en/math/2/7/d/27d04233bccd7d3c47a23fc82a53e765.png" /><b>1</b></td>
+<td style="background:silver"><img class="tex" alt="\overset{\ }{\leftarrow}" src="//upload.wikimedia.org/wikipedia/en/math/5/1/c/51cb7c049fd9b8b9866c21821af9ec01.png" /><b>1</b></td>
+<td><img class="tex" alt="\overset{\ }{\leftarrow}" src="//upload.wikimedia.org/wikipedia/en/math/5/1/c/51cb7c049fd9b8b9866c21821af9ec01.png" />1</td>
+<td><img class="tex" alt="\overset{\ }{\leftarrow}" src="//upload.wikimedia.org/wikipedia/en/math/5/1/c/51cb7c049fd9b8b9866c21821af9ec01.png" />1</td>
+</tr>
+<tr>
+<th>A</th>
+<td>0</td>
+<td style="background:silver;color:#FF6600"><img class="tex" alt="\overset{\nwarrow}{\ }" src="//upload.wikimedia.org/wikipedia/en/math/2/7/d/27d04233bccd7d3c47a23fc82a53e765.png" />1</td>
+<td style="background:silver"><img class="tex" alt="\overset{\ \ \uparrow}{\leftarrow}" src="//upload.wikimedia.org/wikipedia/en/math/b/9/2/b92fc54c4b57c5bf4e1b69712a43b10f.png" />1</td>
+<td><img class="tex" alt="\overset{\ \ \uparrow}{\leftarrow}" src="//upload.wikimedia.org/wikipedia/en/math/b/9/2/b92fc54c4b57c5bf4e1b69712a43b10f.png" />1</td>
+<td style="background:silver;color:#FF6600"><img class="tex" alt="\overset{\nwarrow}{\ }" src="//upload.wikimedia.org/wikipedia/en/math/2/7/d/27d04233bccd7d3c47a23fc82a53e765.png" /><b>2</b></td>
+<td style="background:silver"><img class="tex" alt="\overset{\ }{\leftarrow}" src="//upload.wikimedia.org/wikipedia/en/math/5/1/c/51cb7c049fd9b8b9866c21821af9ec01.png" /><b>2</b></td>
+</tr>
+<tr>
+<th>C</th>
+<td>0</td>
+<td><img class="tex" alt="\overset{\ \uparrow}{\ }" src="//upload.wikimedia.org/wikipedia/en/math/1/b/2/1b2447629b8ac4751f2beea69233fc4f.png" />1</td>
+<td><img class="tex" alt="\overset{\ \ \uparrow}{\leftarrow}" src="//upload.wikimedia.org/wikipedia/en/math/b/9/2/b92fc54c4b57c5bf4e1b69712a43b10f.png" />1</td>
+<td style="background:silver;color:#FF6600"><img class="tex" alt="\overset{\nwarrow}{\ }" src="//upload.wikimedia.org/wikipedia/en/math/2/7/d/27d04233bccd7d3c47a23fc82a53e765.png" />2</td>
+<td style="background:silver"><img class="tex" alt="\overset{\ \ \uparrow}{\leftarrow}" src="//upload.wikimedia.org/wikipedia/en/math/b/9/2/b92fc54c4b57c5bf4e1b69712a43b10f.png" />2</td>
+<td style="background:silver"><img class="tex" alt="\overset{\ \ \uparrow}{\leftarrow}" src="//upload.wikimedia.org/wikipedia/en/math/b/9/2/b92fc54c4b57c5bf4e1b69712a43b10f.png" /><b>2</b></td>
+</tr>
+</table>
+<h2><span class="editsection">[<a href="/w/index.php?title=Longest_common_subsequence_problem&amp;action=edit&amp;section=9" title="Edit section: Relation to other problems">edit</a>]</span> <span class="mw-headline" id="Relation_to_other_problems">Relation to other problems</span></h2>
+<p>For two strings <img class="tex" alt="X_{1 \dots m}" src="//upload.wikimedia.org/wikipedia/en/math/f/4/7/f47af46ca72c446b00720db88c98b2f5.png" /> and <img class="tex" alt="Y_{1 \dots n}" src="//upload.wikimedia.org/wikipedia/en/math/b/5/6/b5638a140abcb631174d953a2a1b3333.png" />, the length of the <a href="/wiki/Shortest_common_supersequence_problem" title="Shortest common supersequence problem" class="mw-redirect">shortest common supersequence</a> is related to the length of the LCS by<sup id="cite_ref-BHR00_1-1" class="reference"><a href="#cite_note-BHR00-1"><span>[</span>2<span>]</span></a></sup></p>
+<dl>
+<dd><img class="tex" alt="\left|SCS(X,Y)\right| = n + m - \left|LCS(X,Y)\right|." src="//upload.wikimedia.org/wikipedia/en/math/d/4/1/d416c1b6666206426f0d46a84320258b.png" /></dd>
+</dl>
+<p>The <a href="/wiki/Levenshtein_distance" title="Levenshtein distance">edit distance</a> when only insertion and deletion is allowed (no substitution), or when the cost of the substitution is the double of the cost of an insertion or deletion, is:</p>
+<dl>
+<dd><img class="tex" alt="d'(X,Y) = n + m - 2 \cdot \left|LCS(X,Y)\right|." src="//upload.wikimedia.org/wikipedia/en/math/8/b/2/8b234789a69648755f4b12ed4d818dd5.png" /></dd>
+</dl>
+<h2><span class="editsection">[<a href="/w/index.php?title=Longest_common_subsequence_problem&amp;action=edit&amp;section=10" title="Edit section: Code for the dynamic programming solution">edit</a>]</span> <span class="mw-headline" id="Code_for_the_dynamic_programming_solution">Code for the dynamic programming solution</span></h2>
+<h3><span class="editsection">[<a href="/w/index.php?title=Longest_common_subsequence_problem&amp;action=edit&amp;section=11" title="Edit section: Computing the length of the LCS">edit</a>]</span> <span class="mw-headline" id="Computing_the_length_of_the_LCS">Computing the length of the LCS</span></h3>
+<p>The function below takes as input sequences <code>X[1..m]</code> and <code>Y[1..n]</code> computes the LCS between <code>X[1..i]</code> and <code>Y[1..j]</code> for all <code>1 ≤ i ≤ m</code> and <code>1 ≤ j ≤ n</code>, and stores it in <code>C[i,j]</code>. <code>C[m,n]</code> will contain the length of the LCS of <code>X</code> and <code>Y</code>.</p>
+<p><br /></p>
+<pre>
+<b>function</b> LCSLength(X[1..m], Y[1..n])
+    C = array(0..m, 0..n)
+    <b>for</b> i := 0..m
+       C[i,0] = 0
+    <b>for</b> j := 0..n
+       C[0,j] = 0
+    <b>for</b> i := 1..m
+        <b>for</b> j := 1..n
+            <b>if</b> X[i] = Y[j]
+                C[i,j] := C[i-1,j-1] + 1
+            <b>else</b>:
+                C[i,j] := max(C[i,j-1], C[i-1,j])
+    <b>return</b> C[m,n]
+</pre>
+<p><br />
+Alternatively, <a href="/wiki/Memoization" title="Memoization">memoization</a> could be used.</p>
+<h3><span class="editsection">[<a href="/w/index.php?title=Longest_common_subsequence_problem&amp;action=edit&amp;section=12" title="Edit section: Reading out an LCS">edit</a>]</span> <span class="mw-headline" id="Reading_out_an_LCS">Reading out an LCS</span></h3>
+<p>The following function <a href="/wiki/Backtracking" title="Backtracking">backtracks</a> the choices taken when computing the <code>C</code> table. If the last characters in the prefixes are equal, they must be in an LCS. If not, check what gave the largest LCS of keeping <span class="texhtml" dir="ltr"><i>x</i><sub><i>i</i></sub></span> and <span class="texhtml" dir="ltr"><i>y</i><sub><i>j</i></sub></span>, and make the same choice. Just choose one if they were equally long. Call the function with <code>i=m</code> and <code>j=n</code>.</p>
+<pre>
+<b>function</b> backtrack(C[0..m,0..n], X[1..m], Y[1..n], i, j)
+    <b>if</b> i = 0 <b>or</b> j = 0
+        <b>return</b> ""
+    <b>else if </b> X[i] = Y[j]
+        <b>return</b> backtrack(C, X, Y, i-1, j-1) + X[i]
+    <b>else</b>
+        <b>if</b> C[i,j-1] &gt; C[i-1,j]
+            <b>return</b> backtrack(C, X, Y, i, j-1)
+        <b>else</b>
+            <b>return</b> backtrack(C, X, Y, i-1, j)
+</pre>
+<h3><span class="editsection">[<a href="/w/index.php?title=Longest_common_subsequence_problem&amp;action=edit&amp;section=13" title="Edit section: Reading out all LCSs">edit</a>]</span> <span class="mw-headline" id="Reading_out_all_LCSs">Reading out all LCSs</span></h3>
+<p>If choosing <span class="texhtml" dir="ltr"><i>x</i><sub><i>i</i></sub></span> and <span class="texhtml" dir="ltr"><i>y</i><sub><i>j</i></sub></span> would give an equally long result, read out both resulting subsequences. This is returned as a set by this function. Notice that this function is not polynomial, as it might branch in almost every step if the strings are similar.</p>
+<pre>
+<b>function</b> backtrackAll(C[0..m,0..n], X[1..m], Y[1..n], i, j)
+    <b>if</b> i = 0 <b>or</b> j = 0
+        <b>return</b> {""}
+    <b>else if</b> X[i] = Y[j]
+        <b>return</b> {Z + X[i] <b>for all</b> Z <b>in</b> backtrackAll(C, X, Y, i-1, j-1)}
+    <b>else</b>
+        R := {}
+        <b>if</b> C[i,j-1] ≥ C[i-1,j]
+            R := backtrackAll(C, X, Y, i, j-1)
+        <b>if</b> C[i-1,j] ≥ C[i,j-1]
+            R := R ∪ backtrackAll(C, X, Y, i-1, j)
+        <b>return</b> R
+</pre>
+<h3><span class="editsection">[<a href="/w/index.php?title=Longest_common_subsequence_problem&amp;action=edit&amp;section=14" title="Edit section: Print the diff">edit</a>]</span> <span class="mw-headline" id="Print_the_diff">Print the diff</span></h3>
+<p>This function will backtrack through the C matrix, and print the <a href="/wiki/Diff" title="Diff">diff</a> between the two sequences. Notice that you will get a different answer if you exchange <code>≥</code> and <code>&lt;</code>, with <code>&gt;</code> and <code>≤</code> below.</p>
+<pre>
+<b>function</b> printDiff(C[0..m,0..n], X[1..m], Y[1..n], i, j)
+    <b>if</b> i &gt; 0 <b>and</b> j &gt; 0 <b>and</b> X[i] = Y[j]
+        printDiff(C, X, Y, i-1, j-1)
+        print "  " + X[i]
+    <b>else</b>
+        <b>if</b> j &gt; 0 <b>and</b> (i = 0 <b>or</b> C[i,j-1] ≥ C[i-1,j])
+            printDiff(C, X, Y, i, j-1)
+            print "+ " + Y[j]
+        <b>else if</b> i &gt; 0 <b>and</b> (j = 0 <b>or</b> C[i,j-1] &lt; C[i-1,j])
+            printDiff(C, X, Y, i-1, j)
+            print "- " + X[i]
+        <b>else</b>
+            print ""
+</pre>
+<h3><span class="editsection">[<a href="/w/index.php?title=Longest_common_subsequence_problem&amp;action=edit&amp;section=15" title="Edit section: Example">edit</a>]</span> <span class="mw-headline" id="Example">Example</span></h3>
+<p>Let <span class="texhtml" dir="ltr"><i>X</i></span> be "<code>XMJYAUZ</code>" and <span class="texhtml" dir="ltr"><i>Y</i></span> be "<code>MZJAWXU</code>". The longest common subsequence between <span class="texhtml" dir="ltr"><i>X</i></span> and <span class="texhtml" dir="ltr"><i>Y</i></span> is "<code>MJAU</code>". The table <code>C</code> shown below, which is generated by the function <code>LCSlength</code>, shows the lengths of the longest common subsequences between prefixes of <span class="texhtml" dir="ltr"><i>X</i></span> and <span class="texhtml" dir="ltr"><i>Y</i></span>. The <span class="texhtml" dir="ltr"><i>i</i></span>th row and <span class="texhtml" dir="ltr"><i>j</i></span>th column shows the length of the LCS between <span class="texhtml" dir="ltr"><i>X</i><sub>1..<i>i</i></sub></span> and <span class="texhtml" dir="ltr"><i>Y</i><sub>1..<i>j</i></sub></span>.</p>
+<pre>
+     | 0 1 2 3 4 5 6 7
+     |   <i>M</i> <i>Z</i> <i>J</i> <i>A</i> <i>W</i> <i>X</i> <i>U</i>
+-----|-----------------
+0    | <u>0</u> 0 0 0 0 0 0 0
+1  <i>X</i> | <u>0</u> 0 0 0 0 0 1 1
+2  <i>M</i> | 0 <u>1</u> <u>1</u> 1 1 1 1 1
+3  <i>J</i> | 0 1 1 <u>2</u> 2 2 2 2
+4  <i>Y</i> | 0 1 1 <u>2</u> 2 2 2 2
+5  <i>A</i> | 0 1 1 2 <u>3</u> <u>3</u> <u>3</u> 3
+6  <i>U</i> | 0 1 1 2 3 3 3 <u>4</u>
+7  <i>Z</i> | 0 1 2 2 3 3 3 <u>4</u>
+</pre>
+<p>The underlined numbers show the path the function <code>backtrack</code> would follow from the bottom right to the top left corner, when reading out an LCS. If the current symbols in <span class="texhtml" dir="ltr"><i>X</i></span> and <span class="texhtml" dir="ltr"><i>Y</i></span> are equal, they are part of the LCS, and we go both up and left. If not, we go up or left, depending on which cell has a higher number. This corresponds to either taking the LCS between <span class="texhtml" dir="ltr"><i>X</i><sub>1..<i>i</i> − 1</sub></span> and <span class="texhtml" dir="ltr"><i>Y</i><sub>1..<i>j</i></sub></span>, or <span class="texhtml" dir="ltr"><i>X</i><sub>1..<i>i</i></sub></span> and <span class="texhtml" dir="ltr"><i>Y</i><sub>1..<i>j</i> − 1</sub></span></p>
+<h2><span class="editsection">[<a href="/w/index.php?title=Longest_common_subsequence_problem&amp;action=edit&amp;section=16" title="Edit section: Code optimization">edit</a>]</span> <span class="mw-headline" id="Code_optimization">Code optimization</span></h2>
+<p>Several optimizations can be made to the algorithm above to speed it up for real-world cases.</p>
+<h3><span class="editsection">[<a href="/w/index.php?title=Longest_common_subsequence_problem&amp;action=edit&amp;section=17" title="Edit section: Reduce the problem set">edit</a>]</span> <span class="mw-headline" id="Reduce_the_problem_set">Reduce the problem set</span></h3>
+<p>The C matrix in the naive algorithm <a href="/wiki/Quadratic_growth" title="Quadratic growth">grows quadratically</a> with the lengths of the sequences. For two 100-item sequences, a 10,000-item matrix would be needed, and 10,000 comparisons would need to be done. In most real-world cases, especially source code diffs and patches, the beginnings and ends of files rarely change, and almost certainly not both at the same time. If only a few items have changed in the middle of the sequence, the beginning and end can be eliminated. This reduces not only the memory requirements for the matrix, but also the number of comparisons that must be done.</p>
+<pre>
+<b>function</b> LCS(X[1..m], Y[1..n])
+    start := 1
+    m_end := m
+    n_end := n
+    <i>trim off the matching items at the beginning</i>
+    <b>while</b> start ≤ m_end <b>and</b> start ≤ n_end <b>and</b> X[start] = Y[start]
+        start := start + 1
+    <i>trim off the matching items at the end</i>
+    <b>while</b> start ≤ m_end <b>and</b> start ≤ n_end <b>and</b> X[m_end] = Y[n_end]
+        m_end := m_end - 1
+        n_end := n_end - 1
+    C = array(start-1..m_end, start-1..n_end)
+    <i>only loop over the items that have changed</i>
+    <b>for</b> i := start..m_end
+        <b>for</b> j := start..n_end
+            <i>the algorithm continues as before ...</i>
+</pre>
+<p>In the best case scenario, a sequence with no changes, this optimization would completely eliminate the need for the C matrix. In the worst case scenario, a change to the very first and last items in the sequence, only two additional comparisons are performed.</p>
+<h3><span class="editsection">[<a href="/w/index.php?title=Longest_common_subsequence_problem&amp;action=edit&amp;section=18" title="Edit section: Reduce the comparison time">edit</a>]</span> <span class="mw-headline" id="Reduce_the_comparison_time">Reduce the comparison time</span></h3>
+<p>Most of the time taken by the naive algorithm is spent performing comparisons between items in the sequences. For textual sequences such as source code, you want to view lines as the sequence elements instead of single characters. This can mean comparisons of relatively long strings for each step in the algorithm. Two optimizations can be made that can help to reduce the time these comparisons consume.</p>
+<h3><span class="editsection">[<a href="/w/index.php?title=Longest_common_subsequence_problem&amp;action=edit&amp;section=19" title="Edit section: Reduce strings to hashes">edit</a>]</span> <span class="mw-headline" id="Reduce_strings_to_hashes">Reduce strings to hashes</span></h3>
+<p>A <a href="/wiki/Hash_function" title="Hash function">hash function</a> or <a href="/wiki/Checksum" title="Checksum">checksum</a> can be used to reduce the size of the strings in the sequences. That is, for source code where the average line is 60 or more characters long, the hash or checksum for that line might be only 8 to 40 characters long. Additionally, the randomized nature of hashes and checksums would guarantee that comparisons would short-circuit faster, as lines of source code will rarely be changed at the beginning.</p>
+<p>There are three primary drawbacks to this optimization. First, an amount of time needs to be spent beforehand to precompute the hashes for the two sequences. Second, additional memory needs to be allocated for the new hashed sequences. However, in comparison to the naive algorithm used here, both of these drawbacks are relatively minimal.</p>
+<p>The third drawback is that of <a href="/wiki/Hash_collision" title="Hash collision" class="mw-redirect">collisions</a>. Since the checksum or hash is not guaranteed to be unique, there is a small chance that two different items could be reduced to the same hash. This is unlikely in source code, but it is possible. A cryptographic hash would therefore be far better suited for this optimization, as its entropy is going to be significantly greater than that of a simple checksum. However, the setup and computational requirements of a cryptographic hash may not be worth it for small sequence lengths.</p>
+<h3><span class="editsection">[<a href="/w/index.php?title=Longest_common_subsequence_problem&amp;action=edit&amp;section=20" title="Edit section: Reduce the required space">edit</a>]</span> <span class="mw-headline" id="Reduce_the_required_space">Reduce the required space</span></h3>
+<p>If only the length of the LCS is required, the matrix can be reduced to a <img class="tex" alt="2\times \min(n,m)" src="//upload.wikimedia.org/wikipedia/en/math/5/e/4/5e45d3dd189425baabf340e1c3e7a62e.png" /> matrix with ease, or to a <span class="texhtml" dir="ltr">min(<i>m</i>,<i>n</i>) + 1</span> vector (smarter) as the dynamic programming approach only needs the current and previous columns of the matrix. <a href="/wiki/Hirschberg%27s_algorithm" title="Hirschberg's algorithm">Hirschberg's algorithm</a> allows the construction of the optimal sequence itself in the same quadratic time and linear space bounds.<sup id="cite_ref-5" class="reference"><a href="#cite_note-5"><span>[</span>6<span>]</span></a></sup></p>
+<h2><span class="editsection">[<a href="/w/index.php?title=Longest_common_subsequence_problem&amp;action=edit&amp;section=21" title="Edit section: See also">edit</a>]</span> <span class="mw-headline" id="See_also">See also</span></h2>
+<ul>
+<li><a href="/wiki/Longest_increasing_subsequence" title="Longest increasing subsequence">Longest increasing subsequence</a></li>
+</ul>
+<h2><span class="editsection">[<a href="/w/index.php?title=Longest_common_subsequence_problem&amp;action=edit&amp;section=22" title="Edit section: References">edit</a>]</span> <span class="mw-headline" id="References">References</span></h2>
+<div class="reflist" style="list-style-type: decimal;">
+<ol class="references">
+<li id="cite_note-0"><b><a href="#cite_ref-0">^</a></b> <span class="citation Journal">David Maier (1978). "The Complexity of Some Problems on Subsequences and Supersequences". <i>J. ACM</i> (ACM Press) <b>25</b> (2): 322–336. <a href="/wiki/Digital_object_identifier" title="Digital object identifier">doi</a>:<a rel="nofollow" class="external text" href="http://dx.doi.org/10.1145%2F322063.322075">10.1145/322063.322075</a>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=article&amp;rft.atitle=The+Complexity+of+Some+Problems+on+Subsequences+and+Supersequences&amp;rft.jtitle=J.+ACM&amp;rft.aulast=David+Maier&amp;rft.au=David+Maier&amp;rft.date=1978&amp;rft.volume=25&amp;rft.issue=2&amp;rft.pages=322%26ndash%3B336&amp;rft.pub=ACM+Press&amp;rft_id=info:doi/10.1145%2F322063.322075&amp;rfr_id=info:sid/en.wikipedia.org:Longest_common_subsequence_problem"><span style="display: none;">&#160;</span></span></li>
+<li id="cite_note-BHR00-1">^ <a href="#cite_ref-BHR00_1-0"><sup><i><b>a</b></i></sup></a> <a href="#cite_ref-BHR00_1-1"><sup><i><b>b</b></i></sup></a> <span class="citation Journal">L. Bergroth and H. Hakonen and T. Raita (2000). "A Survey of Longest Common Subsequence Algorithms". <i>SPIRE</i> (IEEE Computer Society) <b>00</b>: 39–48. <a href="/wiki/Digital_object_identifier" title="Digital object identifier">doi</a>:<a rel="nofollow" class="external text" href="http://dx.doi.org/10.1109%2FSPIRE.2000.878178">10.1109/SPIRE.2000.878178</a>. <a href="/wiki/International_Standard_Book_Number" title="International Standard Book Number">ISBN</a>&#160;<a href="/wiki/Special:BookSources/ISBN_0-7695-0746-8" title="Special:BookSources/ISBN 0-7695-0746-8">ISBN 0-7695-0746-8</a>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=article&amp;rft.atitle=A+Survey+of+Longest+Common+Subsequence+Algorithms&amp;rft.jtitle=SPIRE&amp;rft.aulast=L.+Bergroth+and+H.+Hakonen+and+T.+Raita&amp;rft.au=L.+Bergroth+and+H.+Hakonen+and+T.+Raita&amp;rft.date=2000&amp;rft.volume=00&amp;rft.pages=39%26ndash%3B48&amp;rft.pub=IEEE+Computer+Society&amp;rft_id=info:doi/10.1109%2FSPIRE.2000.878178&amp;rft.isbn=ISBN+0-7695-0746-8&amp;rfr_id=info:sid/en.wikipedia.org:Longest_common_subsequence_problem"><span style="display: none;">&#160;</span></span></li>
+<li id="cite_note--2"><b><a href="#cite_ref-_2-0">^</a></b> <span class="citation Journal">Ronald I. Greenberg (2003-08-06). "Bounds on the Number of Longest Common Subsequences". <a href="/wiki/ArXiv" title="ArXiv">arXiv</a>:<a rel="nofollow" class="external text" href="http://arxiv.org/abs/cs.DM/0301030">cs.DM/0301030</a>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=article&amp;rft.atitle=Bounds+on+the+Number+of+Longest+Common+Subsequences&amp;rft.jtitle=%27%27%5B%5BarXiv%5D%5D%3A%5Bhttp%3A%2F%2Farxiv.org%2Fabs%2Fcs.DM%2F0301030+cs.DM%2F0301030%5D%27%27&amp;rft.aulast=Ronald+I.+Greenberg&amp;rft.au=Ronald+I.+Greenberg&amp;rft.date=2003-08-06&amp;rfr_id=info:sid/en.wikipedia.org:Longest_common_subsequence_problem"><span style="display: none;">&#160;</span></span></li>
+<li id="cite_note-3"><b><a href="#cite_ref-3">^</a></b> <span class="citation book">Xia, Xuhua (2007). <i>Bioinformatics and the Cell: Modern Computational Approaches in Genomics, Proteomics and Transcriptomics</i>. New York: Springer. p.&#160;24. <a href="/wiki/International_Standard_Book_Number" title="International Standard Book Number">ISBN</a>&#160;<a href="/wiki/Special:BookSources/0387713360" title="Special:BookSources/0387713360">0387713360</a>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=book&amp;rft.btitle=Bioinformatics+and+the+Cell%3A++Modern+Computational+Approaches+in+Genomics%2C+Proteomics+and+Transcriptomics&amp;rft.aulast=Xia&amp;rft.aufirst=Xuhua&amp;rft.au=Xia%2C%26%2332%3BXuhua&amp;rft.date=2007&amp;rft.pages=p.%26nbsp%3B24&amp;rft.place=New+York&amp;rft.pub=Springer&amp;rft.isbn=0387713360&amp;rfr_id=info:sid/en.wikipedia.org:Longest_common_subsequence_problem"><span style="display: none;">&#160;</span></span></li>
+<li id="cite_note-4"><b><a href="#cite_ref-4">^</a></b> <span class="citation book"><a href="/wiki/Thomas_H._Cormen" title="Thomas H. Cormen">Thomas H. Cormen</a>, <a href="/wiki/Charles_E._Leiserson" title="Charles E. Leiserson">Charles E. Leiserson</a>, <a href="/wiki/Ronald_L._Rivest" title="Ronald L. Rivest" class="mw-redirect">Ronald L. Rivest</a> and <a href="/wiki/Clifford_Stein" title="Clifford Stein">Clifford Stein</a> (2001). "15.4". <i><a href="/wiki/Introduction_to_Algorithms" title="Introduction to Algorithms">Introduction to Algorithms</a></i> (2nd ed.). MIT Press and McGraw-Hill. pp.&#160;350–355. <a href="/wiki/International_Standard_Book_Number" title="International Standard Book Number">ISBN</a>&#160;<a href="/wiki/Special:BookSources/0-262-53196-8" title="Special:BookSources/0-262-53196-8">0-262-53196-8</a>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.genre=bookitem&amp;rft.btitle=15.4&amp;rft.atitle=%5B%5BIntroduction+to+Algorithms%5D%5D&amp;rft.aulast=%5B%5BThomas+H.+Cormen%5D%5D%2C+%5B%5BCharles+E.+Leiserson%5D%5D%2C+%5B%5BRonald+L.+Rivest%5D%5D+and+%5B%5BClifford+Stein%5D%5D&amp;rft.au=%5B%5BThomas+H.+Cormen%5D%5D%2C+%5B%5BCharles+E.+Leiserson%5D%5D%2C+%5B%5BRonald+L.+Rivest%5D%5D+and+%5B%5BClifford+Stein%5D%5D&amp;rft.date=2001&amp;rft.pages=pp.%26nbsp%3B350%E2%80%93355&amp;rft.edition=2nd&amp;rft.pub=MIT+Press+and+McGraw-Hill&amp;rft.isbn=0-262-53196-8&amp;rfr_id=info:sid/en.wikipedia.org:Longest_common_subsequence_problem"><span style="display: none;">&#160;</span></span></li>
+<li id="cite_note-5"><b><a href="#cite_ref-5">^</a></b> <span class="citation Journal"><a href="/wiki/Dan_Hirschberg" title="Dan Hirschberg">Hirschberg, D. S.</a> (1975). "A linear space algorithm for computing maximal common subsequences". <i>Communications of the ACM</i> <b>18</b> (6): 341–343. <a href="/wiki/Digital_object_identifier" title="Digital object identifier">doi</a>:<a rel="nofollow" class="external text" href="http://dx.doi.org/10.1145%2F360825.360861">10.1145/360825.360861</a>.</span><span class="Z3988" title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&amp;rft.genre=article&amp;rft.atitle=A+linear+space+algorithm+for+computing+maximal+common+subsequences&amp;rft.jtitle=Communications+of+the+ACM&amp;rft.aulast=Hirschberg%2C+D.+S.&amp;rft.au=Hirschberg%2C+D.+S.&amp;rft.date=1975&amp;rft.volume=18&amp;rft.issue=6&amp;rft.pages=341%E2%80%93343&amp;rft_id=info:doi/10.1145%2F360825.360861&amp;rfr_id=info:sid/en.wikipedia.org:Longest_common_subsequence_problem"><span style="display: none;">&#160;</span></span></li>
+</ol>
+</div>
+<h2><span class="editsection">[<a href="/w/index.php?title=Longest_common_subsequence_problem&amp;action=edit&amp;section=23" title="Edit section: External links">edit</a>]</span> <span class="mw-headline" id="External_links">External links</span></h2>
+<table class="metadata mbox-small plainlinks" style="border:1px solid #aaa; background-color:#f9f9f9;">
+<tr>
+<td class="mbox-image"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/d/df/Wikibooks-logo-en-noslogan.svg/40px-Wikibooks-logo-en-noslogan.svg.png" width="40" height="40" /></td>
+<td class="mbox-text" style="">The Wikibook <i><a class="external text" href="//en.wikibooks.org/wiki/Algorithm_implementation">Algorithm implementation</a></i> has a page on the topic of
+<div style="margin-left:10px;"><i><b><a class="external text" href="//en.wikibooks.org/wiki/Algorithm_implementation/Strings/Longest_common_subsequence">Longest common subsequence</a></b></i></div>
+</td>
+</tr>
+</table>
+<ul>
+<li><a rel="nofollow" class="external text" href="http://nist.gov/dads/HTML/longestCommonSubsequence.html">Dictionary of Algorithms and Data Structures: longest common subsequence</a></li>
+<li><a rel="nofollow" class="external text" href="http://www.markusstengel.de/text/en/i_4_1_5_3.html">GPL implementation of the LCS-Delta algorithm</a></li>
+<li><a rel="nofollow" class="external text" href="http://www.ics.uci.edu/~eppstein/161/960229.html">LCS lecture notes</a></li>
+<li><a rel="nofollow" class="external text" href="http://www.ibm.com/developerworks/java/library/j-seqalign/index.html?ca=dgr-jw17dynamicjava&amp;S_TACT=105AGX59&amp;S_CMP=GR">Dynamic programming and sequence alignment</a></li>
+</ul>
+
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 5302/1000000
+Post-expand include size: 28723/2048000 bytes
+Template argument size: 9171/2048000 bytes
+Expensive parser function count: 0/500
+-->
+
+<!-- Saved in parser cache with key enwiki:pcache:idhash:236105-0!1!0!!en!4!* and timestamp 20120122164453 generated by srv235 -->
+</div>				<!-- /bodycontent -->
+								<!-- printfooter -->
+				<div class="printfooter">
+				Retrieved from "<a href="http://en.wikipedia.org/w/index.php?title=Longest_common_subsequence_problem&amp;oldid=466982829">http://en.wikipedia.org/w/index.php?title=Longest_common_subsequence_problem&amp;oldid=466982829</a>"				</div>
+				<!-- /printfooter -->
+												<!-- catlinks -->
+				<div id='catlinks' class='catlinks'><div id="mw-normal-catlinks"><a href="/wiki/Special:Categories" title="Special:Categories">Categories</a>: <ul><li><a href="/wiki/Category:Problems_on_strings" title="Category:Problems on strings">Problems on strings</a></li><li><a href="/wiki/Category:Combinatorics" title="Category:Combinatorics">Combinatorics</a></li><li><a href="/wiki/Category:Dynamic_programming" title="Category:Dynamic programming">Dynamic programming</a></li><li><a href="/wiki/Category:Polynomial-time_problems" title="Category:Polynomial-time problems">Polynomial-time problems</a></li><li><a href="/wiki/Category:NP-complete_problems" title="Category:NP-complete problems">NP-complete problems</a></li></ul></div></div>				<!-- /catlinks -->
+												<div class="visualClear"></div>
+				<!-- debughtml -->
+								<!-- /debughtml -->
+			</div>
+			<!-- /bodyContent -->
+		</div>
+		<!-- /content -->
+		<!-- header -->
+		<div id="mw-head" class="noprint">
+			
+<!-- 0 -->
+<div id="p-personal" class="">
+	<h5>Personal tools</h5>
+	<ul>
+		<li id="pt-login"><a href="/w/index.php?title=Special:UserLogin&amp;returnto=Longest+common+subsequence+problem" title="You are encouraged to log in; however, it is not mandatory. [o]" accesskey="o">Log in / create account</a></li>
+	</ul>
+</div>
+
+<!-- /0 -->
+			<div id="left-navigation">
+				
+<!-- 0 -->
+<div id="p-namespaces" class="vectorTabs">
+	<h5>Namespaces</h5>
+	<ul>
+					<li  id="ca-nstab-main" class="selected"><span><a href="/wiki/Longest_common_subsequence_problem"  title="View the content page [c]" accesskey="c">Article</a></span></li>
+					<li  id="ca-talk"><span><a href="/wiki/Talk:Longest_common_subsequence_problem"  title="Discussion about the content page [t]" accesskey="t">Talk</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-variants" class="vectorMenu emptyPortlet">
+		<h5><span>Variants</span><a href="#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+			</div>
+			<div id="right-navigation">
+				
+<!-- 0 -->
+<div id="p-views" class="vectorTabs">
+	<h5>Views</h5>
+	<ul>
+					<li id="ca-view" class="selected"><span><a href="/wiki/Longest_common_subsequence_problem" >Read</a></span></li>
+					<li id="ca-edit"><span><a href="/w/index.php?title=Longest_common_subsequence_problem&amp;action=edit"  title="You can edit this page. &#10;Please use the preview button before saving. [e]" accesskey="e">Edit</a></span></li>
+					<li id="ca-history" class="collapsible"><span><a href="/w/index.php?title=Longest_common_subsequence_problem&amp;action=history"  title="Past versions of this page [h]" accesskey="h">View history</a></span></li>
+			</ul>
+</div>
+
+<!-- /0 -->
+
+<!-- 1 -->
+<div id="p-cactions" class="vectorMenu emptyPortlet">
+	<h5><span>Actions</span><a href="#"></a></h5>
+	<div class="menu">
+		<ul>
+					</ul>
+	</div>
+</div>
+
+<!-- /1 -->
+
+<!-- 2 -->
+<div id="p-search">
+	<h5><label for="searchInput">Search</label></h5>
+	<form action="/w/index.php" id="searchform">
+		<input type='hidden' name="title" value="Special:Search"/>
+				<div id="simpleSearch">
+						<input type="text" name="search" value="" title="Search Wikipedia [f]" accesskey="f" id="searchInput" />						<button type="submit" name="button" title="Search Wikipedia for this text" id="searchButton"><img src="//bits.wikimedia.org/skins-1.18/vector/images/search-ltr.png?303-4" alt="Search" /></button>					</div>
+			</form>
+</div>
+
+<!-- /2 -->
+			</div>
+		</div>
+		<!-- /header -->
+		<!-- panel -->
+			<div id="mw-panel" class="noprint">
+				<!-- logo -->
+					<div id="p-logo"><a style="background-image: url(//upload.wikimedia.org/wikipedia/en/b/bc/Wiki.png);" href="/wiki/Main_Page"  title="Visit the main page"></a></div>
+				<!-- /logo -->
+				
+<!-- navigation -->
+<div class="portal" id='p-navigation'>
+	<h5>Navigation</h5>
+	<div class="body">
+		<ul>
+			<li id="n-mainpage-description"><a href="/wiki/Main_Page" title="Visit the main page [z]" accesskey="z">Main page</a></li>
+			<li id="n-contents"><a href="/wiki/Portal:Contents" title="Guides to browsing Wikipedia">Contents</a></li>
+			<li id="n-featuredcontent"><a href="/wiki/Portal:Featured_content" title="Featured content – the best of Wikipedia">Featured content</a></li>
+			<li id="n-currentevents"><a href="/wiki/Portal:Current_events" title="Find background information on current events">Current events</a></li>
+			<li id="n-randompage"><a href="/wiki/Special:Random" title="Load a random article [x]" accesskey="x">Random article</a></li>
+			<li id="n-sitesupport"><a href="//wikimediafoundation.org/wiki/Special:Landingcheck?landing_page=WMFJA085&amp;language=en&amp;utm_source=donate&amp;utm_medium=sidebar&amp;utm_campaign=20101204SB002" title="Support us">Donate to Wikipedia</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /navigation -->
+
+<!-- SEARCH -->
+
+<!-- /SEARCH -->
+
+<!-- interaction -->
+<div class="portal" id='p-interaction'>
+	<h5>Interaction</h5>
+	<div class="body">
+		<ul>
+			<li id="n-help"><a href="/wiki/Help:Contents" title="Guidance on how to use and edit Wikipedia">Help</a></li>
+			<li id="n-aboutsite"><a href="/wiki/Wikipedia:About" title="Find out about Wikipedia">About Wikipedia</a></li>
+			<li id="n-portal"><a href="/wiki/Wikipedia:Community_portal" title="About the project, what you can do, where to find things">Community portal</a></li>
+			<li id="n-recentchanges"><a href="/wiki/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+			<li id="n-contact"><a href="/wiki/Wikipedia:Contact_us" title="How to contact Wikipedia">Contact Wikipedia</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /interaction -->
+
+<!-- TOOLBOX -->
+<div class="portal" id='p-tb'>
+	<h5>Toolbox</h5>
+	<div class="body">
+		<ul>
+			<li id="t-whatlinkshere"><a href="/wiki/Special:WhatLinksHere/Longest_common_subsequence_problem" title="List of all English Wikipedia pages containing links to this page [j]" accesskey="j">What links here</a></li>
+			<li id="t-recentchangeslinked"><a href="/wiki/Special:RecentChangesLinked/Longest_common_subsequence_problem" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+			<li id="t-upload"><a href="/wiki/Wikipedia:Upload" title="Upload files [u]" accesskey="u">Upload file</a></li>
+			<li id="t-specialpages"><a href="/wiki/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+			<li id="t-permalink"><a href="/w/index.php?title=Longest_common_subsequence_problem&amp;oldid=466982829" title="Permanent link to this revision of the page">Permanent link</a></li>
+<li id="t-cite"><a href="/w/index.php?title=Special:Cite&amp;page=Longest_common_subsequence_problem&amp;id=466982829" title="Information on how to cite this page">Cite this page</a></li>		</ul>
+	</div>
+</div>
+
+<!-- /TOOLBOX -->
+
+<!-- coll-print_export -->
+<div class="portal" id='p-coll-print_export'>
+	<h5>Print/export</h5>
+	<div class="body">
+		<ul id="collectionPortletList"><li id="coll-create_a_book"><a href="/w/index.php?title=Special:Book&amp;bookcmd=book_creator&amp;referer=Longest+common+subsequence+problem" title="Create a book or page collection" rel="nofollow">Create a book</a></li><li id="coll-download-as-rl"><a href="/w/index.php?title=Special:Book&amp;bookcmd=render_article&amp;arttitle=Longest+common+subsequence+problem&amp;oldid=466982829&amp;writer=rl" title="Download a PDF version of this wiki page" rel="nofollow">Download as PDF</a></li><li id="t-print"><a href="/w/index.php?title=Longest_common_subsequence_problem&amp;printable=yes" title="Printable version of this page [p]" accesskey="p">Printable version</a></li></ul>	</div>
+</div>
+
+<!-- /coll-print_export -->
+
+<!-- LANGUAGES -->
+<div class="portal" id='p-lang'>
+	<h5>Languages</h5>
+	<div class="body">
+		<ul>
+			<li class="interwiki-eo"><a href="//eo.wikipedia.org/wiki/Plej_longa_komuna_subvica_problemo">Esperanto</a></li>
+			<li class="interwiki-fa"><a href="//fa.wikipedia.org/wiki/%D8%A8%D8%B2%D8%B1%DA%AF%E2%80%8C%D8%AA%D8%B1%DB%8C%D9%86_%D8%B2%DB%8C%D8%B1%D8%AF%D9%86%D8%A8%D8%A7%D9%84%D9%87_%D9%85%D8%B4%D8%AA%D8%B1%DA%A9">فارسی</a></li>
+			<li class="interwiki-fr"><a href="//fr.wikipedia.org/wiki/Plus_longue_sous-s%C3%A9quence_commune">Français</a></li>
+			<li class="interwiki-ko"><a href="//ko.wikipedia.org/wiki/%EC%B5%9C%EC%9E%A5_%EA%B3%B5%ED%86%B5_%EB%B6%80%EB%B6%84_%EC%88%98%EC%97%B4">한국어</a></li>
+			<li class="interwiki-it"><a href="//it.wikipedia.org/wiki/Massima_sottosequenza_comune">Italiano</a></li>
+			<li class="interwiki-pl"><a href="//pl.wikipedia.org/wiki/Najd%C5%82u%C5%BCszy_wsp%C3%B3lny_podci%C4%85g">Polski</a></li>
+			<li class="interwiki-ru"><a href="//ru.wikipedia.org/wiki/%D0%9D%D0%B0%D0%B8%D0%B1%D0%BE%D0%BB%D1%8C%D1%88%D0%B0%D1%8F_%D0%BE%D0%B1%D1%89%D0%B0%D1%8F_%D0%BF%D0%BE%D0%B4%D0%BF%D0%BE%D1%81%D0%BB%D0%B5%D0%B4%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D1%8C">Русский</a></li>
+			<li class="interwiki-zh"><a href="//zh.wikipedia.org/wiki/%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E5%AD%90%E5%BA%8F%E5%88%97">中文</a></li>
+		</ul>
+	</div>
+</div>
+
+<!-- /LANGUAGES -->
+			</div>
+		<!-- /panel -->
+		<!-- footer -->
+		<div id="footer">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 21 December 2011 at 06:21.<br /></li>
+											<li id="footer-info-copyright">Text is available under the <a rel="license" href="//en.wikipedia.org/wiki/Wikipedia:Text_of_Creative_Commons_Attribution-ShareAlike_3.0_Unported_License">Creative Commons Attribution-ShareAlike License</a><a rel="license" href="//creativecommons.org/licenses/by-sa/3.0/" style="display:none;"></a>;
+additional terms may apply.
+See <a href="//wikimediafoundation.org/wiki/Terms_of_use">Terms of use</a> for details.<br/>
+Wikipedia&reg; is a registered trademark of the <a href="//www.wikimediafoundation.org/">Wikimedia Foundation, Inc.</a>, a non-profit organization.<br /></li><li class="noprint"><a class='internal' href="//en.wikipedia.org/wiki/Wikipedia:Contact_us">Contact us</a></li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="//wikimediafoundation.org/wiki/Privacy_policy" title="wikimedia:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="/wiki/Wikipedia:About" title="Wikipedia:About">About Wikipedia</a></li>
+											<li id="footer-places-disclaimer"><a href="/wiki/Wikipedia:General_disclaimer" title="Wikipedia:General disclaimer">Disclaimers</a></li>
+											<li id="footer-places-mobileview"><a href='/w/index.php?title=Longest_common_subsequence_problem&amp;useformat=mobile' class='noprint'>Mobile view</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+					<li id="footer-copyrightico">
+						<a href="//wikimediafoundation.org/"><img src="//bits.wikimedia.org/images/wikimedia-button.png" width="88" height="31" alt="Wikimedia Foundation"/></a>
+					</li>
+					<li id="footer-poweredbyico">
+						<a href="//www.mediawiki.org/"><img src="//bits.wikimedia.org/skins-1.18/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+					</li>
+				</ul>
+						<div style="clear:both"></div>
+		</div>
+		<!-- /footer -->
+		<!-- fixalpha -->
+		<script type="text/javascript"> if ( window.isMSIE55 ) fixalpha(); </script>
+		<!-- /fixalpha -->
+		<script src="//bits.wikimedia.org/en.wikipedia.org/load.php?debug=false&amp;lang=en&amp;modules=skins.vector&amp;only=scripts&amp;skin=vector&amp;*" type="text/javascript"></script>
+<script type="text/javascript">if ( window.mediaWiki ) {
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax", "mediawiki.legacy.mwsuggest", "ext.gadget.wmfFR2011Style", "ext.vector.collapsibleNav", "ext.vector.collapsibleTabs", "ext.vector.editWarning", "ext.vector.simpleSearch", "ext.UserBuckets", "ext.articleFeedback.startup", "ext.articleFeedbackv5.startup", "ext.markAsHelpful"]);
+}
+</script>
+<script src="/w/index.php?title=Special:BannerController&amp;cache=/cn.js&amp;303-4" type="text/javascript"></script>
+<script src="//bits.wikimedia.org/en.wikipedia.org/load.php?debug=false&amp;lang=en&amp;modules=site&amp;only=scripts&amp;skin=vector&amp;*" type="text/javascript"></script>
+<script type="text/javascript">if ( window.mediaWiki ) {
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":false,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"vector","stubthreshold":0,"thumbsize":4,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":1,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"flaggedrevssimpleui":1,"flaggedrevsstable":0,"flaggedrevseditdiffs":true,"flaggedrevsviewdiffs":false,"vector-simplesearch":1,"useeditwarning":1,"vector-collapsiblenav":1,"usebetatoolbar":1,"usebetatoolbar-cgd":1,"wikilove-enabled":1,"variant":"en","language":"en","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false,"searchNs100":false,"searchNs101":false,"searchNs108":false,"searchNs109":false,"gadget-wmfFR2011Style":1});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: enwiki:resourceloader:filter:minify-js:4:b41a86ec4e0fe8329bc3ce917e792339 */
+}
+</script><script src="//geoiplookup.wikimedia.org/" type="text/javascript"></script><!-- Served by srv226 in 0.084 secs. -->
+	</body>
+</html>

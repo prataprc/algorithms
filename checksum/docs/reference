@@ -1,0 +1,38 @@
+Reference :
+
+  Checksum : http://en.wikipedia.org/wiki/Checksum
+  Hamming code :   http://en.wikipedia.org/wiki/Hamming_code
+
+General concept of checksum
+
+  A message that is m bits long can be viewed as a corner of the m-dimensional
+  hypercube. The effect of a checksum algorithm that yields an n-bit checksum is
+  to map each m-bit message to a corner of a larger hypercube, with dimension
+  m+n.  The 2m+n corners of this hypercube represent all possible received
+  messages. The valid received messages (those that have the correct checksum)
+  comprise a smaller set, with only 2m corners.
+
+  A single-bit transmission error then corresponds to a displacement from a
+  valid corner (the correct message and checksum) to one of the m adjacent
+  corners. An error that affects k bits moves the message to a corner that is k
+  steps removed from its correct corner. The goal of a good checksum algorithm
+  is to spread the valid corners as far from each other as possible, so as to
+  increase the likelihood that "typical" transmission errors will end up in an
+  invalid corner.
+
+  Checksum functions are related to,
+    hash functions
+    cryptographic hash functions
+    fingerprints
+    randomization functions
+
+Algorithms :
+
+  * Parity byte / Parity word
+  * Hamming code
+  * Modular sum
+  * Fletcher's checksum
+  * Cyclic Redundancy Check-s
+  * Adler-32
+    Almost as good as CRC and takes less time to compute. But the algorithm is 
+    not cryptographically strong.

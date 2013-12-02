@@ -1,0 +1,29 @@
+GCD :
+  http://en.wikipedia.org/wiki/Euclidean_algorithm
+  Ancient GCD algorithm
+
+  http://en.wikipedia.org/wiki/Binary_GCD_algorithm
+  A fast version of GCD algorithm
+
+  http://en.wikipedia.org/wiki/Lehmer's_GCD_algorithm
+  More complex version used for big numbers that have a 
+  representation as a string of digits.
+
+Generating Primes & and factors :
+  http://en.wikipedia.org/wiki/Generating_primes
+  http://www.haskell.org/haskellwiki/Prime_numbers
+  http://mathschallenge.net/index.php?section=faq&ref=number/number_of_divisors
+  http://en.wikipedia.org/wiki/Miller%E2%80%93Rabin_primality_test
+
+Types of abstract computing machines :
+
+  Turing machines, of course (Alan Turing, 1936)
+  Register machines (John von Neumann)
+  The lambda calculus (Alonzo Church, 1936)
+  Combinator logic (Moses Schönfinkel, 1924)
+  Markov algorithms (Andrei Markov, the younger, 1951)
+  Semi-Thue Grammars (Axel Thue, Noam Chomsky)
+  Post systems (Emil Post, 1943)
+  Recursive functions (Stephen Cole Kleene, 1935)
+  Insertion-Deletion Systems (Lila Kari et. al., 1996)
+  The Game of Life (John Conway) and related one-dimensional cellular automata (Stephen Wolfram)

@@ -1,0 +1,16 @@
+Reference :
+
+  Hashing  : http://en.wikipedia.org/wiki/Hash_function
+  Cryptographic hash : http://en.wikipedia.org/wiki/Secure_Hash_Algorithm
+
+  Associated links,
+    http://en.wikipedia.org/wiki/Collision_resistance
+    http://csrc.nist.gov/groups/ST/toolkit/index.html
+    http://en.wikipedia.org/wiki/HashKeeper
+
+Algorithms :
+
+  md4: The MD4 Message Digest Algorithm (RFC 1320)
+  md5: The MD5 Message Digest Algorithm (RFC 1321)
+  sha: Secure Hash Standard, SHA-1, SHA-2 and ongoing SHA-3
+  hmac: Keyed-Hashing for Message Authentication (RFC 2104)
